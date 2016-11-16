@@ -1,10 +1,7 @@
 class Array
-
   def my_each(&blk)
+    size.times { |i| blk.call(self[i]) }
 
-    size.times do |i|
-      blk.call(self[i])
-    end
     self
   end
 
@@ -21,17 +18,12 @@ class Array
   end
 
   def my_any?(&blk)
-    my_each do |el|
-      return true if blk.call(el)
-    end
+    my_each { |el| return true if blk.call(el) }
     false
   end
 
   def my_all?(&blk)
-    my_each do |el|
-      return false unless blk.call(el)
-    end
-
+    my_each { |el| return false unless blk.call(el) }
     true
   end
 
@@ -44,6 +36,7 @@ class Array
         result << el
       end
     end
+
     result
   end
 
@@ -55,14 +48,13 @@ class Array
       arrays.my_each { |array| other_array << array[i] }
       result_array << other_array
     end
+
     result_array
   end
 
   def my_rotate(rotate_num = 1)
     return_array = []
-    size.times do |i|
-      return_array << self[(i + rotate_num) % size]
-    end
+    size.times { |i| return_array << self[(i + rotate_num) % size] }
     return_array
   end
 
@@ -75,9 +67,7 @@ class Array
 
   def my_reverse
     result_array = []
-    (length - 1).downto(0) do |i|
-      result_array << self[i]
-    end
+    (length - 1).downto(0) { |i| result_array << self[i] }
     result_array
   end
 
@@ -106,7 +96,6 @@ class Array
   def bubble_sort(&prc)
     self.dup.bubble_sort!(&prc)
   end
-
 end
 
 def factors(num)
