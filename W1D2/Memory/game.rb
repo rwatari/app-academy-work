@@ -70,7 +70,7 @@ class Game
 end
 
 if __FILE__ == $PROGRAM_NAME
-  player = ComputerPlayer.new
+  player = HumanPlayer.new
   board = Game.new(player)
   board.play
 end

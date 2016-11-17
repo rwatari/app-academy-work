@@ -4,15 +4,15 @@ class Board
   ONE_TO_NINE = (1..9).to_a
 
   SQUARE = [
-    [0,0], [0,1], [0,2],
-    [1,0], [1,1], [1,2],
-    [2,0], [2,1], [2,2]
+    [0, 0], [0, 1], [0, 2],
+    [1, 0], [1, 1], [1, 2],
+    [2, 0], [2, 1], [2, 2]
   ]
 
   SQUARE_CORNERS = [
-    [0,0], [0,3], [0,6],
-    [3,0], [3,3], [3,6],
-    [6,0], [6,3], [6,6]
+    [0, 0], [0, 3], [0, 6],
+    [3, 0], [3, 3], [3, 6],
+    [6, 0], [6, 3], [6, 6]
   ]
 
   SQUARES = SQUARE_CORNERS.map do |corner|
@@ -26,13 +26,15 @@ class Board
 
     f = File.open(file_name)
 
-    f.each_line.with_index do |line, i|
+    f.each_line do |line|
       row = line.chomp.split("").map(&:to_i)
 
-      grid << row.map.with_index do |num, j|
-        Tile.new(num, [i, j])
+      grid << row.map.with_index do |num|
+        Tile.new(num)
       end
     end
+
+    f.close
 
     grid
   end
@@ -55,16 +57,18 @@ class Board
     grid.map { |row| render_row(row) }.join(divider)
   end
 
+  def solved?
+    rows_solved? && cols_solved? && squares_solved?
+  end
+
+  private
+
   def divider
     "\n#{'-' * 26}\n"
   end
 
   def render_row(row)
     row.map(&:to_s).join("|")
-  end
-
-  def solved?
-    rows_solved? && cols_solved? && squares_solved?
   end
 
   def [](pos)

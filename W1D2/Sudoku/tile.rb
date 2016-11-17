@@ -1,9 +1,8 @@
 class Tile
-  attr_reader :position, :given, :value
+  attr_reader :given, :value
 
-  def initialize(value, pos)
+  def initialize(value)
     @value = value
-    @position = pos
     @given = !value.zero?
   end
 
