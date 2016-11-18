@@ -10,53 +10,70 @@ class QueensSolver
 
   def solve
     until solved?
-      test_next_row
+      place_next_row
       if @stuck
         remove_last_queen
-        #shift queen to next space
       end
+
+      while @stuck
+        unstuck
+      end
+
+      render
+      sleep(0.25)
+      system("clear")
     end
-  end
-
-  def shift_queen
-    last_queen = @queens.last
-
-    #TODO
   end
 
   def remove_last_queen
     @queens.pop
   end
 
-  def test_next_row
-    new_queen = Queen.new([current_row, 0])
+  def shift_queen(queen)
+    queen.move_to([queen.x, queen.y + 1])
+  end
 
-    8.times do |col|
-      new_queen.move_to([current_row, col])
+  def place_next_row
+    # tries to place a queen in the next row
+    # if it can't, it will set @stuck to true
+    new_queen = Queen.new([next_row, 0])
 
-      next if queens.any? { |queen| queen.attacks?(new_queen) }
+    7.times do
+      if queens.none? { |queen| queen.attacks?(new_queen) }
+        place_queen(new_queen)
+        return
+      end
 
-      place_queen(new_queen)
-      @stuck = false
+      shift_queen(new_queen)
     end
 
     @stuck = true
   end
 
+  def unstuck
+    last_queen = queens.pop
+    shift_queen(last_queen)
+
+    until queens.none? { |queen| queen.attacks?(last_queen) }
+      shift_queen(last_queen)
+    end
+
+    if last_queen.y <= 7
+      place_queen(last_queen)
+      @stuck = false
+    end
+  end
+
   def first_queen
-    place_queen(Queen.new([current_row, rand(0..7)]))
+    place_queen(Queen.new([0, rand(0..7)]))
   end
 
   def place_queen(queen)
     queens << queen
   end
 
-  def current_row
-    queens.size
-  end
-
   def next_row
-    current_row + 1
+    queens.size
   end
 
   def render
@@ -65,7 +82,7 @@ class QueensSolver
       @board[queen.x][queen.y] = "Q"
     end
 
-    @board
+    @board.each { |row| p row }
   end
 
   def reset_board
