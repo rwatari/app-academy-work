@@ -23,6 +23,9 @@ class QueensSolver
       sleep(0.25)
       system("clear")
     end
+
+    puts "Solved!"
+    render
   end
 
   def remove_last_queen
