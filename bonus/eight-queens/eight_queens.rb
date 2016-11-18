@@ -11,13 +11,9 @@ class QueensSolver
   def solve
     until solved?
       place_next_row
-      if @stuck
-        remove_last_queen
-      end
 
-      while @stuck
-        unstuck
-      end
+      remove_last_queen if @stuck
+      unstuck while @stuck
 
       render
       sleep(0.25)
@@ -36,18 +32,22 @@ class QueensSolver
     queen.move_to([queen.x, queen.y + 1])
   end
 
+  def no_queens_attack(queen)
+    queens.none? { |q| q.attacks?(queen) }
+  end
+
   def place_next_row
     # tries to place a queen in the next row
     # if it can't, it will set @stuck to true
     new_queen = Queen.new([next_row, 0])
 
     7.times do
-      if queens.none? { |queen| queen.attacks?(new_queen) }
+      if no_queens_attack(new_queen)
         place_queen(new_queen)
         return
+      else
+        shift_queen(new_queen)
       end
-
-      shift_queen(new_queen)
     end
 
     @stuck = true
@@ -57,9 +57,7 @@ class QueensSolver
     last_queen = queens.pop
     shift_queen(last_queen)
 
-    until queens.none? { |queen| queen.attacks?(last_queen) }
-      shift_queen(last_queen)
-    end
+    shift_queen(last_queen) until no_queens_attack(last_queen)
 
     if last_queen.y <= 7
       place_queen(last_queen)
