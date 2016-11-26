@@ -12,7 +12,7 @@ class QueensSolver
     8.times do |row|
       row_str = ""
       8.times do |col|
-        row_str << " ".colorize(:background => color(row, col))
+        row_str << "  ".colorize(:background => color(row, col))
       end
       board << row_str
     end
