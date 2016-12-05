@@ -6,5 +6,11 @@
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
 
-User.create!(name: 'Raku', email: 'rwatari@gmail.com')
-User.create!(name: 'Hazal', email: 'hazal.can93@gmail.com')
+User.create!(username: 'rwatari')
+User.create!(username: 'hcan')
+User.create!(username: 'gizmo')
+
+Contact.create!(name: 'Hazal', email: 'hazal@gmail.com', user_id: 1)
+Contact.create!(name: 'Gizmo', email: 'gizmo@gizmo.com', user_id: 1)
+
+ContactShare.create!(contact_id: 1, user_id: 3)
