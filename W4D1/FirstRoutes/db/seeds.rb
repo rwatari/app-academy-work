@@ -9,8 +9,12 @@
 User.create!(username: 'rwatari')
 User.create!(username: 'hcan')
 User.create!(username: 'gizmo')
+User.create!(username: 'richard')
 
 Contact.create!(name: 'Hazal', email: 'hazal@gmail.com', owner_id: 1)
 Contact.create!(name: 'Gizmo', email: 'gizmo@gizmo.com', owner_id: 1)
+Contact.create!(name: 'Richard', email: 'richard@gizmo.com', owner_id: 2)
 
-ContactShare.create!(contact_id: 1, user_id: 3)
+
+ContactShare.create!(contact_id: 1, shared_user_id: 3)
+ContactShare.create!(contact_id: 3, shared_user_id: 1)
