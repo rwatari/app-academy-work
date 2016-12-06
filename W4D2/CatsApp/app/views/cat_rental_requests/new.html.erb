@@ -1,0 +1,26 @@
+<h1>Make a request!</h1>
+
+<form action="<%= cat_rental_requests_url %>" method="post">
+  <label for="cat">Select a cat</label>
+  <select id="cat" name="request[cat_id]">
+    <% Cat.all.each do |cat| %>
+      <option value="<%= cat.id %>"><%= cat.name %></option>
+    <% end %>
+  </select>
+
+  <br>
+
+  <label for="start_date">Start Date</label>
+  <input id="start_date" type="date" name="request[start_date]" value="">
+
+  <br>
+
+  <label for="end_date">End Date</label>
+  <input id="end_date" type="date" name="request[end_date]" value="">
+
+  <br>
+
+  <input type="submit" value="Submit">
+</form>
+
+<%= link_to "Back to index", cats_url %>
