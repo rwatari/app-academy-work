@@ -13,10 +13,15 @@
 
 class Track < ActiveRecord::Base
   validates :album_id, :name, presence: true
-
+  validates :track_type, inclusion: { in: %w(Regular Bonus), allow_nil: true }
   belongs_to :album
 
   has_one :band,
-    through: :album,
-    source: :band
+          through: :album,
+          source: :band
+
+  delegate :band_name,
+          :title,
+          to: :album,
+          prefix: true
 end

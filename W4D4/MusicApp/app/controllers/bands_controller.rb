@@ -1,4 +1,6 @@
 class BandsController < ApplicationController
+  before_action :require_current_user!
+  
   def index
     @bands = Band.all.order(:name)
   end
@@ -9,12 +11,13 @@ class BandsController < ApplicationController
       flash[:notices] = ["#{@band.name} added!"]
       redirect_to bands_url
     else
-      flash[:errors] = @band.errors.full_messages
+      flash.now[:errors] = @band.errors.full_messages
       render :new
     end
   end
 
   def new
+    @band = Band.new
   end
 
   def edit
@@ -31,7 +34,7 @@ class BandsController < ApplicationController
       flash[:notices] = ["#{@band.name} updated!"]
       redirect_to bands_url
     else
-      flash[:errors] = @band.errors.full_messages
+      flash.now[:errors] = @band.errors.full_messages
       render :new
     end
   end

@@ -1,0 +1,5 @@
+<h1>Add a new track!</h1>
+
+<%= render "form", track: @track, album_id: @album_id %>
+
+<%= link_to "Back to album", album_url(@album_id) %>
