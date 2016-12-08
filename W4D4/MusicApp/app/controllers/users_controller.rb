@@ -1,5 +1,7 @@
 class UsersController < ApplicationController
   before_action :require_current_user!, only: :show
+  before_action :require_logged_out!, only: :new
+  
   def new
   end
 

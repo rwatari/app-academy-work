@@ -1,4 +1,6 @@
 class SessionsController < ApplicationController
+  before_action :require_logged_out!, only: :new
+
   def new
   end
 
