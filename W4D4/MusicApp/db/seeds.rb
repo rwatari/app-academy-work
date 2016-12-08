@@ -6,3 +6,8 @@
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
 User.create!(email: "rwatari@gmail.com", password: "password")
+Band.create!(name: "U2")
+Band.create!(name: "Coldplay")
+Band.create!(name: "Beatles")
+Band.create!(name: "Sia")
+Band.create!(name: "The Killers")
