@@ -2,22 +2,24 @@
 #
 # Table name: users
 #
-#  id              :integer          not null, primary key
-#  email           :string           not null
-#  password_digest :string           not null
-#  session_token   :string           not null
-#  created_at      :datetime         not null
-#  updated_at      :datetime         not null
+#  id               :integer          not null, primary key
+#  email            :string           not null
+#  password_digest  :string           not null
+#  session_token    :string           not null
+#  created_at       :datetime         not null
+#  updated_at       :datetime         not null
+#  activated        :boolean          default("false")
+#  activation_token :string
 #
 
 class User < ActiveRecord::Base
   attr_reader :password
 
   validates :email, :session_token, presence: true, uniqueness: true
-  validates :password_digest, presence: true
+  validates :password_digest, :activation_token, presence: true
   validates :password, length: { minimum: 6, allow_nil: true }
 
-  after_initialize :ensure_session_token
+  after_initialize :ensure_session_token, :ensure_activation_token
 
   has_many :notes
 
@@ -50,5 +52,9 @@ class User < ActiveRecord::Base
 
   def ensure_session_token
     self.session_token ||= User.generate_session_token
+  end
+
+  def ensure_activation_token
+    self.activation_token ||= User.generate_session_token
   end
 end
