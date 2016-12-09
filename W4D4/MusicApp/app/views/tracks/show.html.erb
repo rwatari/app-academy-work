@@ -14,4 +14,12 @@
   </p>
 <% end %>
 
+<% unless @notes.empty? %>
+  <h3>Notes:</h3>
+  <%= render @notes %>
+<% end %>
+
+<h3>Leave a note!</h3>
+<%= render "notes/form", track_id: @track.id %>
+
 <%= link_to "Back to album", album_url(@track.album_id) %>

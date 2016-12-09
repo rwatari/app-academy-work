@@ -21,3 +21,5 @@ Track.create!(album_id: 1, track_type: "Regular", name: "Mr. Brightside")
 Track.create!(album_id: 1, track_type: "Regular", name: "Smile Like You Mean It")
 Track.create!(album_id: 1, track_type: "Regular", name: "Somebody Told Me")
 Track.create!(album_id: 1, track_type: "Regular", name: "All These Things That I've Done")
+
+Note.create!(track_id: 1, user_id: 1, text: "This is a cool song.")

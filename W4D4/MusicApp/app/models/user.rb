@@ -19,6 +19,8 @@ class User < ActiveRecord::Base
 
   after_initialize :ensure_session_token
 
+  has_many :notes
+
   def self.find_by_credentials(user_params)
     user = self.find_by_email(user_params[:email])
     return nil if user.nil?

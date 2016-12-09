@@ -10,7 +10,11 @@ Rails.application.routes.draw do
     resources :tracks, only: :new
   end
 
-  resources :tracks, except: [:index, :new]
+  resources :tracks, except: [:index, :new] do
+    resources :notes, only: :create
+  end
+
+  resources :notes, only: :destroy
 
   root to: "sessions#new"
   # The priority is based upon order of creation: first created -> highest priority.

@@ -25,6 +25,7 @@ class TracksController < ApplicationController
 
   def show
     @track = Track.find_by_id(params[:id])
+    @notes = @track.notes.includes(:user)
   end
 
   def update
@@ -43,7 +44,7 @@ class TracksController < ApplicationController
     @track = Track.find_by_id(params[:id])
 
     if @track.nil?
-      flash.now[:errors] = ["Track not in database"]
+      flash[:errors] = ["Track not in database"]
     else
       @track.destroy!
       flash[:notices] = ["Track deleted!"]
