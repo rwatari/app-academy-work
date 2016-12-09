@@ -1,14 +1,20 @@
 <h1><%= @album.title %> by <%= @album.band_name %></h1>
-<br>
-<%= link_to "Edit album info", edit_album_url(@album) %>
-<br>
-<%= button_to "Delete album", album_url(@album), method: :delete %>
+
+<% if is_admin? %>
+  <br>
+  <%= link_to "Edit album info", edit_album_url(@album) %>
+  <br>
+  <%= button_to "Delete album", album_url(@album), method: :delete %>
+<% end %>
 
 <ul>
   <% @album.tracks.each do |track| %>
     <li><%= link_to "#{track.name}", track_url(track) %></li>
   <% end %>
 </ul>
-<%= link_to "Add track", new_album_track_url(@album)%>
+
+<% if is_admin? %>
+  <%= link_to "Add track", new_album_track_url(@album)%>
+<% end %>
 <br>
 <%= link_to "Back to band", band_url(@album.band_id) %>

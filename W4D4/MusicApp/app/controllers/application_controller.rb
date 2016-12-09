@@ -3,7 +3,7 @@ class ApplicationController < ActionController::Base
   # For APIs, you may want to use :null_session instead.
   protect_from_forgery with: :exception
 
-  helper_method :current_user, :logged_in?, :log_in!
+  helper_method :current_user, :logged_in?, :log_in!, :is_admin?
 
 
   def log_in!(user)
@@ -33,6 +33,19 @@ class ApplicationController < ActionController::Base
 
   def logged_in?
     !current_user.nil?
+  end
+
+  def require_admin!
+    unless is_admin?
+      render text: "Action for admins only",
+             status: :forbidden,
+             content_type: "text/html"
+    end
+  end
+
+  def is_admin?
+    return false if current_user.nil?
+    current_user.admin
   end
 
   private

@@ -13,6 +13,10 @@
     <%= current_user.email %>
     <%= button_to "Log out", session_url, method: :delete %>
   <% end %>
+
+  <% if is_admin? %>
+    <%= link_to "Users", users_url %>
+  <% end %>
 </header>
 
 <%= render partial: "layouts/notices" %>

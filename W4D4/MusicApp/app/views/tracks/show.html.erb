@@ -1,9 +1,13 @@
 <h1><%= @track.name %> by <%= @track.album_band_name %></h1>
 <h2>from <%= @track.album_title %></h2>
-<br>
-<%= link_to "Edit track info", edit_track_url(@track) %>
-<br>
-<%= button_to "Delete track", track_url(@track), method: :delete %>
+
+<% if is_admin? %>
+  <br>
+  <%= link_to "Edit track info", edit_track_url(@track) %>
+  <br>
+  <%= button_to "Delete track", track_url(@track), method: :delete %>
+<% end %>
+
 
 <h3>Track type:</h3> <%= @track.track_type %>
 <br>

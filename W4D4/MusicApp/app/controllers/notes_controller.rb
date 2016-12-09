@@ -16,7 +16,7 @@ class NotesController < ApplicationController
   def destroy
     note = Note.find_by_id(params[:id])
 
-    unless note.user_id == current_user.id
+    unless note.user_id == current_user.id || is_admin?
       render status: 403
       render text: "You are not allowed"
       return

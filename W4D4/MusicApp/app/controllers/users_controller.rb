@@ -1,6 +1,11 @@
 class UsersController < ApplicationController
   before_action :require_current_user!, only: :show
   before_action :require_logged_out!, only: :new
+  before_action :require_admin!, only: [:index, :toggle_admin]
+
+  def index
+    @users = User.all
+  end
 
   def new
   end
@@ -34,9 +39,17 @@ class UsersController < ApplicationController
       redirect_to new_session_url
     else
       user.toggle(:activated)
+      user.save!
       flash[:notices] = ["Successfully activated account!"]
       log_in!(user)
       redirect_to user_url(user)
     end
+  end
+
+  def toggle_admin
+    user = User.find_by_id(params[:id])
+    user.toggle(:admin)
+    user.save!
+    redirect_to users_url
   end
 end

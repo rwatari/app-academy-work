@@ -1,6 +1,7 @@
 class BandsController < ApplicationController
   before_action :require_current_user!
-  
+  before_action :require_admin!, except: [:index, :show]
+
   def index
     @bands = Band.all.order(:name)
   end

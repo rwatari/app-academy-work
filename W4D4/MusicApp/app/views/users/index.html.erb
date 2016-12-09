@@ -1,0 +1,24 @@
+<h1>Users</h1>
+
+<table>
+  <tr>
+    <th>User email</th>
+    <th>User status</th>
+    <th>Toggle status?</th>
+  </tr>
+  <% @users.each do |user| %>
+    <tr>
+      <td>
+        <%= user.email %>
+      </td>
+      <td>
+        <%= user.admin ? "Admin" : "Regular" %>
+      </td>
+      <td>
+        <%= button_to "Toggle", toggle_admin_user_url(user) %>
+      </td>
+    </tr>
+  <% end %>
+</table>
+
+<%= link_to "Back to bands", bands_url %>
