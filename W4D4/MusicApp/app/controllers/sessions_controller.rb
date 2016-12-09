@@ -13,7 +13,7 @@ class SessionsController < ApplicationController
       log_in!(@user)
       redirect_to user_url(@user)
     else
-      flash.now[:error] = ["No user found with given credentials"]
+      flash.now[:errors] = ["No user found with given credentials"]
       render :new
     end
   end
