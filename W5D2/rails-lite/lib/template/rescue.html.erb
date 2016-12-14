@@ -1,0 +1,14 @@
+<h1>Error: <%= ERB::Util.h(@e) %></h1>
+
+
+<h3>Stack Trace:</h3>
+<% @e.backtrace.take(5).each do |stack| %>
+  <%= ERB::Util.h(stack) %>
+  <br><br>
+<% end %>
+<% if @e.backtrace.length > 5 %>
+....
+<% end %>
+<h3>From <%= ERB::Util.h(@file_name) %>:</h3>
+
+<pre><%= ERB::Util.h(@code) %></pre>
