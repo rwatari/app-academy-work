@@ -1,0 +1,15 @@
+ul {
+    list-style: none;
+    width: 320px;
+}
+
+li {
+    height: 20px;
+    width: 20px;
+    background-color: black;
+    float: left;
+}
+
+.segment {
+  background-color: green;
+}

@@ -1,0 +1,37 @@
+li {
+    border: 1px black solid;
+    width: 80px;
+    height: 80px;
+    list-style: none;
+    float: left;
+    text-align: center;
+    font-size: 60px;
+}
+
+ul {
+    width: 280px;
+    margin: 15px auto;
+}
+
+.unclicked {
+  background-color: lightgray;
+}
+
+.group:after {
+  content: "";
+  display: block;
+  clear: both;
+}
+
+li.o {
+    color: blue;
+}
+
+
+li.x {
+    color: red;
+}
+
+body {
+    text-align: center;
+}
